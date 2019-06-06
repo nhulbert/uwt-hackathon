@@ -145,6 +145,8 @@ $(document).ready(() => {
       const existingDeviceData = trackedDevices.findDevice(messageData.DeviceId);
 
       if (existingDeviceData) {
+        document.getElementById('test').style.top = messageData.IotData.temperature + '%';
+
         existingDeviceData.addData(messageData.MessageDate, messageData.IotData.temperature, messageData.IotData.humidity);
       } else {
         const newDeviceData = new DeviceData(messageData.DeviceId);

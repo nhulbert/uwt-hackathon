@@ -4,8 +4,8 @@ const WebSocket = require('ws');
 const path = require('path');
 const EventHubReader = require('./scripts/event-hub-reader.js');
 
-const iotHubConnectionString = process.env.IotHubConnectionString;
-const eventHubConsumerGroup = process.env.EventHubConsumerGroup;
+const iotHubConnectionString = 'HostName=uwt-rasppi.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=MHmjYB6yGH77iLYrFSjiejIKtNwuvGJS1Cat8o4R1tM=';
+const eventHubConsumerGroup = 'uwt-raspi-consumer';
 
 // Redirect requests to the public subdirectory to the root
 const app = express();
