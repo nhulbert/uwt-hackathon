@@ -6,9 +6,10 @@ $(document).ready(() => {
   const webSocket = new WebSocket(protocol + location.host);
 
   const grid = document.getElementById('grid');
-  for (var i=0; i<15; i++){
+  for (var i=0; i<30; i++){
     for (var j=0; j<15; j++){
         var contain = document.createElement('canvas');
+        contain.id = i+","+j;
         contain.classList.add('gridEl');
         contain.style.left = (300+20*i) + 'px';
         contain.style.top = (400+20*j) + 'px';
@@ -156,6 +157,12 @@ $(document).ready(() => {
       const existingDeviceData = trackedDevices.findDevice(messageData.DeviceId);
 
       if (existingDeviceData) {
+        var el = document.getElementById(messageData.IotData.location);
+        var redInt = Math.floor((messageData.IotData.temperature - 15)*(255.0/20.0));
+        var blueInt = 255 - redInt;
+        var colorHex = "#"+redInt.toString(16)+"00"+blueInt.toString(16);
+
+        el.style.backgroundColor = colorHex;
         existingDeviceData.addData(messageData.MessageDate, messageData.IotData.temperature, messageData.IotData.humidity);
       } else {
         const newDeviceData = new DeviceData(messageData.DeviceId);
