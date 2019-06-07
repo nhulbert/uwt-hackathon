@@ -24,18 +24,18 @@ $(document).ready(() => {
       this.maxLen = 50;
       this.timeData = new Array(this.maxLen);
       this.temperatureData = new Array(this.maxLen);
-      this.humidityData = new Array(this.maxLen);
+      //this.humidityData = new Array(this.maxLen);
     }
 
     addData(time, temperature, humidity) {
       this.timeData.push(time);
       this.temperatureData.push(temperature);
-      this.humidityData.push(humidity || null);
+      //this.humidityData.push(humidity || null);
 
       if (this.timeData.length > this.maxLen) {
         this.timeData.shift();
         this.temperatureData.shift();
-        this.humidityData.shift();
+        //this.humidityData.shift();
       }
     }
   }
@@ -74,7 +74,7 @@ $(document).ready(() => {
         pointHoverBorderColor: 'rgba(255, 204, 0, 1)',
         spanGaps: true,
       },
-      {
+      /*{
         fill: false,
         label: 'Humidity',
         yAxisID: 'Humidity',
@@ -84,14 +84,14 @@ $(document).ready(() => {
         pointHoverBackgroundColor: 'rgba(24, 120, 240, 1)',
         pointHoverBorderColor: 'rgba(24, 120, 240, 1)',
         spanGaps: true,
-      }
+      }*/
     ]
   };
 
   const chartOptions = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'Temperature Real-time Data',
       fontSize: 36,
     },
     scales: {
@@ -109,7 +109,7 @@ $(document).ready(() => {
         type: 'linear',
         scaleLabel: {
           labelString: 'Humidity (%)',
-          display: true,
+          display: false, //true
         },
         position: 'right',
       }]
@@ -133,7 +133,7 @@ $(document).ready(() => {
     const device = trackedDevices.findDevice(listOfDevices[listOfDevices.selectedIndex].text);
     chartData.labels = device.timeData;
     chartData.datasets[0].data = device.temperatureData;
-    chartData.datasets[1].data = device.humidityData;
+    //chartData.datasets[1].data = device.humidityData;
   }
   listOfDevices.addEventListener('change', OnSelectionChange, false);
 
