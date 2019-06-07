@@ -5,6 +5,17 @@ $(document).ready(() => {
   const protocol = document.location.protocol.startsWith('https') ? 'wss://' : 'ws://';
   const webSocket = new WebSocket(protocol + location.host);
 
+  const grid = document.getElementById('grid');
+  for (var i=0; i<15; i++){
+    for (var j=0; j<15; j++){
+        var contain = document.createElement('canvas');
+        contain.classList.add('gridEl');
+        contain.style.left = (300+20*i) + 'px';
+        contain.style.top = (400+20*j) + 'px';
+        grid.appendChild(contain);
+    }
+  }
+
   // A class for holding the last N points of telemetry for a device
   class DeviceData {
     constructor(deviceId) {
@@ -145,8 +156,6 @@ $(document).ready(() => {
       const existingDeviceData = trackedDevices.findDevice(messageData.DeviceId);
 
       if (existingDeviceData) {
-        document.getElementById('test').style.top = messageData.IotData.temperature + '%';
-
         existingDeviceData.addData(messageData.MessageDate, messageData.IotData.temperature, messageData.IotData.humidity);
       } else {
         const newDeviceData = new DeviceData(messageData.DeviceId);
